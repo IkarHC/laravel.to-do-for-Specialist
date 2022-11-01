@@ -14,6 +14,11 @@ class TodoController extends Controller
     public function index()
     {
         //
+        $list = \DB::table('todo')->orderBy('id', 'desc')->get();
+        return view(
+            'index', [
+                'list' => $list,
+            ]);
         return new Response("Список задач");
     }
 
@@ -48,6 +53,8 @@ class TodoController extends Controller
     public function show($id)
     {
         //
+        $task = \DB::table('todo')->where(['id' => $id])->get();
+        return $task->body;
     }
 
     /**
